@@ -13,9 +13,9 @@ namespace BarbarasPieShop
         {
             services.AddControllersWithViews();
             //services.AddScoped<IPieRepository, MockPieRepository>();
-            //services.AddScoped<ICategoryRepository,MockCategoryRepository>();
+            //services.AddScoped<ICategoryRepository, MockCategoryRepository>();
             services.AddScoped<IPieRepository, SqlPieRepository>();
-            services.AddScoped<ICategoryRepository,SqlCategoryRepository>();
+            services.AddScoped<ICategoryRepository, SqlCategoryRepository>();
 
         }
 
