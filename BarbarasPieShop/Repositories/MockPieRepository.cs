@@ -1,8 +1,8 @@
-﻿using BarbarasPieShop.Repositories;
+﻿using BarbarasPieShop.Models;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace BarbarasPieShop.Models
+namespace BarbarasPieShop.Repositories
 {
     public class MockPieRepository : IPieRepository
     {

@@ -12,8 +12,11 @@ namespace BarbarasPieShop
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
-            services.AddScoped<IPieRepository, MockPieRepository>();
-            services.AddScoped<ICategoryRepository,MockCategoryRepository>();
+            //services.AddScoped<IPieRepository, MockPieRepository>();
+            //services.AddScoped<ICategoryRepository,MockCategoryRepository>();
+            services.AddScoped<IPieRepository, SqlPieRepository>();
+            services.AddScoped<ICategoryRepository,SqlCategoryRepository>();
+
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

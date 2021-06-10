@@ -1,10 +1,8 @@
-﻿using BarbarasPieShop.Repositories;
+﻿using BarbarasPieShop.Models;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
-namespace BarbarasPieShop.Models
+namespace BarbarasPieShop.Repositories
 {
     public class MockCategoryRepository : ICategoryRepository
     {
