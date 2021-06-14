@@ -26,5 +26,10 @@ namespace BarbarasPieShop.Controllers
             var pieName = _pieRepository.GetPieName(1);
             return View(pieName);
         }
+
+        public ViewResult PieId()
+        {
+            return View(_pieRepository.GetPieId("Cheese Cake"));
+        }
     }
 }

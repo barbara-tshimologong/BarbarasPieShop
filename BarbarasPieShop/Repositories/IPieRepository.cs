@@ -12,5 +12,7 @@ namespace BarbarasPieShop.Repositories
         Pie GetPieById(int pieId);
 
         string GetPieName(int pieId);
+
+        int GetPieId(string pieName);
     }
 }

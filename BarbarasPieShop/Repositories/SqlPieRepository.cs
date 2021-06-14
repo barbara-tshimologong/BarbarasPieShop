@@ -8,16 +8,17 @@ namespace BarbarasPieShop.Repositories
 {
     internal class SqlPieRepository : IPieRepository
     {
-        private readonly DataAccess _da;
         public SqlPieRepository()
         {
-            _da = new DataAccess(@"Server=(localdb)\MSSQLLocalDB;Database=BarbarasPieShop;Integrated Security = True");
         }
+      
         public IEnumerable<Pie> AllPies
         {
             get
             {
+                DataAccess<object> _da = new DataAccess<object>();
                 List<Pie> allPies = new();
+                _da.ConnectionString = "123";
                 _da.CommandText = "SELECT Name,Price,ShortDescription FROM Pie WHERE IsActive=1";
                 _da.CommandType = System.Data.CommandType.Text;
                 List<object> result = _da.GetList_DataReader();
@@ -69,10 +70,27 @@ namespace BarbarasPieShop.Repositories
 
         public string GetPieName(int pieId)
         {
-            _da.CommandText = "SELECT Name FROM Pie WHERE PieId = pieId AND IsActive=1";
-            _da.CommandType = System.Data.CommandType.Text;
+            DataAccess<string> _da = new()
+            {
+                ConnectionString = @"Server=(localdb)\MSSQLLocalDB;Database=BarbarasPieShop;Integrated Security = True",
+                CommandText = $"SELECT Name FROM Pie WHERE PieId = {pieId} AND IsActive=1",
+                CommandType = System.Data.CommandType.Text
+            };
 
-            return "Strawberry Cake";
+            return _da.GetScalar;
         }
+
+        public int GetPieId(string pieName)
+        {
+            DataAccess<int> _da = new()
+            {
+                ConnectionString = @"Server=(localdb)\MSSQLLocalDB;Database=BarbarasPieShop;Integrated Security = True",
+                CommandText = $"SELECT PieId FROM Pie WHERE Name = '{pieName}' AND IsActive=1",
+                CommandType = System.Data.CommandType.Text
+            };
+
+            return _da.GetScalar;
+        }
+
     }
 }

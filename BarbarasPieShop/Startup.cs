@@ -35,7 +35,7 @@ namespace BarbarasPieShop
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=Pie}/{action=PieId}/{id?}");
             });
         }
     }

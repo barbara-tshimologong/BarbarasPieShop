@@ -7,13 +7,13 @@ namespace MSDataAccess
 {
     public class DataAccess<T>
     {
-        private readonly string _connectionString;
 
-        public DataAccess(string connectionString)
+        public DataAccess()
         {
-            _connectionString = connectionString;
+            
         }
 
+        public string ConnectionString { get;  set; }
         public CommandType CommandType { get; set; }
 
         public string CommandText { get; set; }
@@ -23,7 +23,7 @@ namespace MSDataAccess
         public T GetScalar { 
             get
             {
-                using SqlConnection cn = new SqlConnection(_connectionString);
+                using SqlConnection cn = new SqlConnection(this.ConnectionString);
 
                 using SqlCommand cmd = new SqlCommand
                 {
@@ -38,7 +38,7 @@ namespace MSDataAccess
                     var result = cmd.ExecuteScalar();
                     return (T)result;
                 }
-                catch (SqlException)
+                catch (SqlException ex)
                 {
                     throw;
                 }
@@ -49,7 +49,7 @@ namespace MSDataAccess
         {
             List<Object> rows = new List<object>();
 
-            using SqlConnection cn = new SqlConnection(_connectionString);
+            using SqlConnection cn = new SqlConnection(this.ConnectionString);
 
             using SqlCommand cmd = new SqlCommand
             {
@@ -90,7 +90,7 @@ namespace MSDataAccess
         {
             DataSet ds = new DataSet();
 
-            using SqlConnection cn = new SqlConnection(_connectionString);
+            using SqlConnection cn = new SqlConnection(this.ConnectionString);
 
             using SqlCommand cmd = new SqlCommand(this.CommandText, cn);
 
@@ -114,7 +114,7 @@ namespace MSDataAccess
 
         public int NonQuery()
         {
-            using SqlConnection cn = new SqlConnection(_connectionString);
+            using SqlConnection cn = new SqlConnection(this.ConnectionString);
 
             using SqlCommand cmd = new SqlCommand
             {
