@@ -46,5 +46,10 @@ namespace BarbarasPieShop.Repositories
         {
             return AllPies.FirstOrDefault(p => p.PieId == pieId);
         }
+
+        public string GetPieName(int pieId)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

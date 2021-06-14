@@ -10,5 +10,7 @@ namespace BarbarasPieShop.Repositories
         IEnumerable<Pie> PiesOfTheWeek { get; }
 
         Pie GetPieById(int pieId);
+
+        string GetPieName(int pieId);
     }
 }

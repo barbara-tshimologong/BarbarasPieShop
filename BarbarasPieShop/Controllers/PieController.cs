@@ -20,5 +20,11 @@ namespace BarbarasPieShop.Controllers
 
             return View(pieListViewModel);
         }
+
+        public ViewResult PieName()
+        {
+            var pieName = _pieRepository.GetPieName(1);
+            return View(pieName);
+        }
     }
 }

@@ -5,7 +5,7 @@ using System.Data.SqlClient;
 
 namespace MSDataAccess
 {
-    public class DataAccess
+    public class DataAccess<T>
     {
         private readonly string _connectionString;
 
@@ -20,116 +20,28 @@ namespace MSDataAccess
 
         public List<SqlParameter> Params { get; set; } = new List<SqlParameter>();
         
-        public string GetString()
-        {
-            using SqlConnection cn = new SqlConnection(_connectionString);
-
-            using SqlCommand cmd = new SqlCommand
+        public T GetScalar { 
+            get
             {
+                using SqlConnection cn = new SqlConnection(_connectionString);
+
+                using SqlCommand cmd = new SqlCommand
+                {
                 Connection = cn,
                 CommandType = this.CommandType,
                 CommandText = this.CommandText
-            };
+                };
 
-            try
-            {
-                cn.Open();
-                return cmd.ExecuteScalar().ToString();
-            }
-            catch (SqlException)
-            {
-                throw;
-            }
-        }
-
-        public int GetInt()
-        {
-            using SqlConnection cn = new SqlConnection(_connectionString);
-
-            using SqlCommand cmd = new SqlCommand
-            {
-                Connection = cn,
-                CommandType = this.CommandType,
-                CommandText = this.CommandText
-            };
-
-            try
-            {
-                cn.Open();
-                return (int)cmd.ExecuteScalar();
-            }
-            catch (SqlException)
-            {
-                throw;
-            }
-        }
-
-        public bool GetBoolean()
-        {
-            using SqlConnection cn = new SqlConnection(_connectionString);
-
-            using SqlCommand cmd = new SqlCommand
-            {
-                Connection = cn,
-                CommandType = this.CommandType,
-                CommandText = this.CommandText
-            };
-
-            try
-            {
-                cn.Open();
-                return (bool)cmd.ExecuteScalar();
-            }
-            catch (SqlException)
-            {
-                throw;
-            }
-        }
-
-        public Double GetDouble()
-        {
-            using SqlConnection cn = new SqlConnection(_connectionString);
-
-            using SqlCommand cmd = new SqlCommand
-            {
-                Connection = cn,
-                CommandType = this.CommandType,
-                CommandText = this.CommandText
-            };
-
-            try
-            {
-                cn.Open();
-                return Convert.ToDouble(cmd.ExecuteScalar());
-            }
-            catch (SqlException)
-            {
-                throw;
-            }
-        }
-        
-        public DateTime GetDateTime()
-        {
-            using SqlConnection cn = new SqlConnection(_connectionString);
-
-            using SqlCommand cmd = new SqlCommand
-            {
-                Connection = cn,
-                CommandType = this.CommandType,
-                CommandText = this.CommandText
-            };
-
-            try
-            {
-                cn.Open();
-
-                var result = cmd.ExecuteScalar();
-
-                return Convert.ToDateTime(result);
-            }
-            catch (SqlException)
-            {
-                throw;
+                try
+                {
+                    cn.Open();
+                    var result = cmd.ExecuteScalar();
+                    return (T)result;
+                }
+                catch (SqlException)
+                {
+                    throw;
+                }
             }
         }
 

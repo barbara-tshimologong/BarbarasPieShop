@@ -1,8 +1,8 @@
 ﻿using BarbarasPieShop.Models;
-using MSDataAccess;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using MSDataAccess;
 
 namespace BarbarasPieShop.Repositories
 {
@@ -65,6 +65,14 @@ namespace BarbarasPieShop.Repositories
         public Pie GetPieById(int pieId)
         {
             throw new System.NotImplementedException();
+        }
+
+        public string GetPieName(int pieId)
+        {
+            _da.CommandText = "SELECT Name FROM Pie WHERE PieId = pieId AND IsActive=1";
+            _da.CommandType = System.Data.CommandType.Text;
+
+            return "Strawberry Cake";
         }
     }
 }
